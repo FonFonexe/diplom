@@ -1,29 +1,19 @@
-
 1 Задание 2 части
 
-SELECT login, "inDelivery"
+SELECT login, COUNT(*) AS "inDelivery"
 FROM "Couriers" AS c
-INNER JOIN "Orders" AS o ON c.id=o."courierId";
+INNER JOIN "Orders" AS o ON c.id=o."courierId"
+WHERE "inDelivery" = true
+GROUP BY login;
 
 
 2 Задание 2 части
 
-SELECT *,
+SELECT track,
 CASE
     WHEN "finished" = 'true' THEN '2'
     WHEN "cancelled" = 'true' THEN '-1'
     WHEN "inDelivery" = 'true' THEN '1'
     ELSE '0'
-END AS "Orders"
-FROM "Orders";
-
-или для вывода только одной колонки с статусами заказа
-
-SELECT "Orders",
-CASE
-    WHEN "finished" = 'true' THEN '2'
-    WHEN "cancelled" = 'true' THEN '-1'
-    WHEN "inDelivery" = 'true' THEN '1'
-    ELSE '0'
-END AS "Orders"
+END AS "status_order"
 FROM "Orders";
